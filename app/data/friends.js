@@ -3,32 +3,32 @@ var friends = [
         "Name": "Predator",
         "Photo": "https://cdn.vox-cdn.com/thumbor/i4yuOFwegxlzaTzOwPT6lcRlSFQ=/124x0:1474x900/1200x800/filters:focal(124x0:1474x900)/cdn.vox-cdn.com/uploads/chorus_image/image/48838179/predator.0.0.jpg",
         "Score": [
-          2,
-          4,
-          1,
-          2,
-          2,
           5,
-          3,
-          2,
-          3,
-          1
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
         ]
       },
     {
         "Name": "Major Alan 'Dutch' Schaefer",
         "Photo": "https://townsquare.media/site/442/files/2013/08/Predator.jpg?w=980&q=75",
         "Score": [
-          2,
-          4,
-          1,
-          2,
-          2,
           5,
-          3,
-          2,
-          3,
-          1
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
         ]
       },
       {
