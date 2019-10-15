@@ -155,6 +155,82 @@
         <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
             Submit</button>
     </div>
+
+    <script type="text/javascript">
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
+            var newUser = {
+                name: $("#name").val(),
+                photo: $("#photo").val(),
+                scores: [
+                    $("#q-1").val().trim(),
+                    $("#q-2").val().trim(),
+                    $("#q-3").val().trim(),
+                    $("#q-4").val().trim(),
+                    $("#q-5").val().trim(),
+                    $("#q-6").val().trim(),
+                    $("#q-7").val().trim(),
+                    $("#q-8").val().trim(),
+                    $("#q-9").val().trim(),
+                    $("#q-10").val().trim()
+                ]
+            }
+            var matches = []
+            $.ajax({
+                url: "api/friends",
+                method: "GET"
+            }).then(function (response) {
+                var newU = newUser.scores
+                for (var i = 0; i < response.length; i++) {
+                    var score = 0
+                    for (var j = 9; j > -1; j--) {
+                        var score = score += Math.abs(newU[j] - response[i].scores[j])
+                    }
+                    console.log(response[i].name + "'s score: " + score);
+                    var totals = {
+                        name: response[i].name,
+                        photo: response[i].photo,
+                        score: score
+                    }
+                    matches.push(totals);
+                }
+                matches.sort(function (a, b) {
+                    return a.score - b.score;
+                });
+                console.log(matches)
+                if (matches[0].name != newUser.name) {
+                    var MATCH = matches[0].name
+                    console.log("YOUR MATCH: " + MATCH)
+                    modalShow();
+                    function modalShow() {
+                        console.log("modal");
+                        console.log(matches[0].photo);
+                        var modalImg = $("<img>");
+                        modalImg.attr("src", matches[0].photo)
+                        $(".modal-body").prepend('<img src=' + matches[0].photo + '>')
+                        $(".modal-body").append('<br>' + MATCH);
+                    };
+                } else {
+                    var MATCH = matches[1].name
+                    console.log("YOUR MATCH: " + MATCH);
+                    modalShow();
+                    function modalShow() {
+                        console.log("modal");
+                        console.log(matches[1].photo);
+                        var modalImg = $("<img>");
+                        modalImg.attr("src", matches[1].photo)
+                        $(".modal-body").prepend('<img src=' + matches[1].photo + '>');
+                        $(".modal-body").append('<br>' + MATCH);
+                    };
+                }
+            });
+            $.post("/api/friends", newUser)
+                .then(function (data) {
+                    // console.log(data);
+                    console.log("New User: " + newUser.name)
+                })
+        })
+    </script>
     
 
 </body>
